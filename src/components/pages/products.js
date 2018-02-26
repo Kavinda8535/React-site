@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import Request from 'superagent';
 
 class Products extends Component {
   render() {
