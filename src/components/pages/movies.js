@@ -37,15 +37,8 @@ class Movies extends Component {
         */
 
         // console.log("response");
-        var url = " http://www.omdbapi.com?s=star&y=&r=json&plot=short&&apikey=52502553";
-        Request.get(url).then((response)=>{
-            this.setState({
-                movies: response.body.Search,
-                total: response.body.totalResults
-                
-            });
-            
-        });
+        this.search();
+        
     }
 
     componentDidUpdate()
@@ -65,6 +58,11 @@ class Movies extends Component {
     {
 
     }
+
+    updateSearch()
+    {
+        this.search(this.refs.query.value);
+    }
   
   render() {
       var movies = _.map(this.state.movies, (movie) =>{
@@ -79,7 +77,7 @@ class Movies extends Component {
             </h1>
 
             <div>
-                <input ref="textBox" type="text" />
+                <input ref="query" onChange={ (e) => {this.updateSearch();}} type="text" />
                 <ul>{movies}</ul>
             </div>
 
@@ -91,6 +89,19 @@ class Movies extends Component {
            </div>
         
     );
+  }
+
+  search(query = "star")
+  {
+    var url = `http://www.omdbapi.com?s=${query}&y=&r=json&plot=short&&apikey=52502553`;
+    Request.get(url).then((response)=>{
+        this.setState({
+            movies: response.body.Search,
+            total: response.body.totalResults
+            
+        });
+        
+    });
   }
 }
 
