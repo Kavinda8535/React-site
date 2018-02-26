@@ -9,6 +9,7 @@ import Header from './components/headerComponents/header.js';
 import Footer from './components/footerComponent/footer.js';
 import Homepage from './components/pages/homePage.js';
 import Products from './components/pages/products.js';
+import Movies from './components/pages/movies.js';
 
 // includes
 import './Assets/css/default.min.css';
@@ -23,6 +24,7 @@ class App extends Component {
 
           <Route exact path='/' component={Homepage} />
           <Route exact path='/Products' component={Products} />
+          <Route exact path='/Movies' component={Movies} />
           
           {/* <Homepage/>
           <Products/> */}

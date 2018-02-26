@@ -45,3 +45,29 @@ header{
     }
 }
 
+footer{
+    
+  background: $black;
+  padding: 10px 0;
+  color: $white;
+
+    .socialLinkwarpper
+    {
+
+    a {
+    color: #70726F;
+    font-size: 20px;
+    padding: 10px;
+    border-right: 1px solid #70726F;
+    @include translateY(-50%);
+    display: inline-block;
+    }
+}
+    // a:first-child {
+    // border-left: 1px solid #70726F;
+    // }
+    a:hover {
+    color:$white;
+    }
+}
+

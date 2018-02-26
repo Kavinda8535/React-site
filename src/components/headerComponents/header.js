@@ -19,6 +19,9 @@ class Header extends Component {
                         <Link to="/Products">Products</Link>
                         {/* <a href="#">Products</a> */}
                     </li>
+                    <li>
+                        <Link to="/Movies">Movies</Link>
+                    </li>
                     <li className="last">
                         <Link to="/Contact">Contact</Link>
                         {/* <a href="#">Contact</a> */}
