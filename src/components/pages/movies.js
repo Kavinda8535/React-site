@@ -16,6 +16,8 @@ class Movies extends Component {
         };
     }
 
+    /// ************************************************************************************************
+    /// Called the first time the component is loaded right before the component is added to the page...
     componentWillMount()
     {
 
@@ -29,6 +31,8 @@ class Movies extends Component {
         // });
     }
 
+    /// **********************************************************
+    /// Called after the component has been rendered into the page
     componentDidMount()
     {
         /*
@@ -44,19 +48,29 @@ class Movies extends Component {
         
     }
 
+    /// componentDidUpdate() will not be invoked if shouldComponentUpdate() returns false.
+    /// This method is not called for the initial render.
     componentDidUpdate()
     {
         // http://www.omdbapi.com/?i=tt3896198&apikey=52502553
         
     }
+    /// **********************************************************
+    /// Called when the props provide to the component are changed
     componentWillReceiveProps(nextProps)
     {
 
     }
+
+    /// ****************************************
+    /// Called whenthe props and/or state change
     componentWillUpdate(nextProps, nextState)
     {
 
     }
+
+    /// *************************************
+    /// Callled when the component is removed
     componentWillUnmount()
     {
 
@@ -76,14 +90,14 @@ class Movies extends Component {
   
   render() {
       var movies = _.map(this.state.movies, (movie) => {
-          return <li key={movie.imdbID}>{movie.Title}</li>;
+          return <li className="list-group-item" key={movie.imdbID}>{movie.Title}</li>;
       });
 
       var moviesOption = _.map(this.state.movies, (movie) => {
-          return <option key={`option_${movie.imdbID}`} value={movie.imdbID}>{movie.Title}</option>;
+          return <option className="last" key={`option_${movie.imdbID}`} value={movie.imdbID}>{movie.Title}</option>;
       });
 
-      var selectedMovie = _.find(this.state.movies, (movie) => {
+      var selectedMovie = _.find(this.state. movies, (movie) => {
           return movie.imdbID == this.state.currentMovieId;
       });
 
@@ -94,26 +108,45 @@ class Movies extends Component {
 
     return (
         
-           <div className="container-fluid">
-            
-            <h1>
-              Movies Search here.
+        <div className="container-fluid">
+
+            <div className="row">
+
+                <h1>
+                    Movies Search here.
             </h1>
-
-            <div>
-            {/* <input ref="query" onChange={ (e) => {this.updateSearch();}} type="text" defaultValue="matrix" value={this.state.query}/> */}
-                <input ref="query" onChange={ (e) => {this.updateSearch();}} type="text" value={this.state.query}/>
-                <select ref="movieSelector" value={this.state.currentMovieId} onChange={ (e) => {this.selectMovie();}}> {moviesOption}</select>
-                <ul>{movies}</ul>
-                {img}
             </div>
 
-            <div>
-             <button type="button" className="btn btn-primary">Search</button>
-            </div>
-           
+            <div className="row">
 
-           </div>
+                <div class="col-sm">
+                    <div>
+                        {/* <input ref="query" onChange={ (e) => {this.updateSearch();}} type="text" defaultValue="matrix" value={this.state.query}/> */}
+                        <input ref="query" onChange={(e) => { this.updateSearch(); }} type="text" value={this.state.query} />
+                        <ul className="list-group list-group-flush">{movies}</ul>
+                    </div>
+
+                </div>
+
+                <div class="col-sm">
+
+                    <div className="row">
+                        <select ref="movieSelector" value={this.state.currentMovieId} onChange={(e) => { this.selectMovie(); }}> {moviesOption}</select>
+                    </div>
+
+                    <div class="col-sm">
+                        {img}
+                    </div>
+
+
+                    <div className="row">
+                        <button type="button" className="btn btn-primary">Search</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
         
     );
   }

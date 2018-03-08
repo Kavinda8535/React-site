@@ -5,11 +5,12 @@ import {
 } from 'react-router-dom';
 
 //Components
-import Header from './components/headerComponents/header.js';
-import Footer from './components/footerComponent/footer.js';
-import Homepage from './components/pages/homePage.js';
-import Products from './components/pages/products.js';
-import Movies from './components/pages/movies.js';
+import Header from './components/headerComponents/header';
+import Footer from './components/footerComponent/footer';
+import Homepage from './components/pages/homePage';
+import Products from './components/pages/products';
+import Movies from './components/pages/movies';
+import Signup from './components/pages/signUpPage';
 
 // includes
 import './Assets/css/default.min.css';
@@ -25,6 +26,8 @@ class App extends Component {
           <Route exact path='/' component={Homepage} />
           <Route exact path='/Products' component={Products} />
           <Route exact path='/Movies' component={Movies} />
+
+          <Route exact path='/Signup' component={Signup} />
           
           {/* <Homepage/>
           <Products/> */}
