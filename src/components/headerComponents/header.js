@@ -22,9 +22,12 @@ class Header extends Component {
                     <li>
                         <Link to="/Movies">Movies</Link>
                     </li>
-                    <li className="last">
+                    <li>
                         <Link to="/Contact">Contact</Link>
                         {/* <a href="#">Contact</a> */}
+                    </li>
+                    <li className="last animated pulse">
+                        <Link to="/Signup">Signup</Link>
                     </li>
                 </ul>
             </nav>

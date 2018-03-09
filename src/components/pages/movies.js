@@ -80,6 +80,7 @@ class Movies extends Component {
     {
         this.setState({query: this.refs.query.value})
         this.search(this.refs.query.value);
+        //this.setState({currentMovieId: this.state.currentMovieId});
     }
 
     selectMovie()
@@ -119,8 +120,8 @@ class Movies extends Component {
 
             <div className="row">
 
-                <div class="col-sm">
-                    <div>
+                <div className="col-sm">
+                    <div className="mb-2">
                         {/* <input ref="query" onChange={ (e) => {this.updateSearch();}} type="text" defaultValue="matrix" value={this.state.query}/> */}
                         <input ref="query" onChange={(e) => { this.updateSearch(); }} type="text" value={this.state.query} />
                         <ul className="list-group list-group-flush">{movies}</ul>
@@ -128,18 +129,18 @@ class Movies extends Component {
 
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
 
-                    <div className="row">
+                    <div className="row mb-2 ml-3">
                         <select ref="movieSelector" value={this.state.currentMovieId} onChange={(e) => { this.selectMovie(); }}> {moviesOption}</select>
                     </div>
 
-                    <div class="col-sm">
+                    <div className="col-sm">
                         {img}
                     </div>
 
 
-                    <div className="row">
+                    <div className="row mt-2 ml-3">
                         <button type="button" className="btn btn-primary">Search</button>
                     </div>
 
