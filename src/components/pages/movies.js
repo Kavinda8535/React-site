@@ -129,14 +129,14 @@ class Movies extends Component {
 
             <div className="container-fluid">
 
-                <div className="row">
+                <div className="row ml-4">
 
                     <h1>
                         Movies Search here
-            </h1>
+                    </h1>
                 </div>
 
-                <div className="row">
+                <div className="row ml-2">
 
                     <div className="col-sm">
                         <div className="mb-2">

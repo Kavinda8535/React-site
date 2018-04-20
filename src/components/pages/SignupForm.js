@@ -32,7 +32,7 @@ class SighupForm extends Component{
         <option key={val} value={val}> {key} </option>
         );
         return(
-            <form onSubmit={this.onSubmit}>
+            <form className="ml-2" onSubmit={this.onSubmit}>
                 <h1>Welome to join community</h1>
 
                 <div className="form-group">
