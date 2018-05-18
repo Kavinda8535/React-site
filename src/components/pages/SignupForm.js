@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
+import { connect } from "react-redux";
 
 export class Password extends Component
 {
@@ -112,7 +113,7 @@ class SighupForm extends Component{
                 <div className="form-group">
                     <label className="controle-label">Email</label>
                     <input value={this.state.email} onChange={this.onChange} type="text" name="email" className="form-control" placeholder="Email Address"/>
-
+                    state
                 </div>
 
                 <div className="form-group">
@@ -151,7 +152,7 @@ class SighupForm extends Component{
                         <option value="" disabled>Choose your Timezone </option>
                         {options}
                     </select>
-
+                    pinterest.com
                 </div>
 
                 <div className="form-group">
@@ -164,4 +165,8 @@ class SighupForm extends Component{
     }
 }
 
-export default SighupForm;
+const mapStateToProps = (state) => ({
+    
+})
+
+export default connect(mapStateToProps)(SighupForm);
