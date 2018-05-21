@@ -13,6 +13,13 @@ class Box extends Component{
     }
 }
 
+// const Box = () => (
+
+//     <div> 
+//          <button type="button" className="btn btn-light btn-outline-dark"> Change Color </button>
+//      </div>
+// );
+
 function mapStateToProps(state)
 {
     return {box: state.box}

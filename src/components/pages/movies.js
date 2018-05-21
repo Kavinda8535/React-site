@@ -158,7 +158,7 @@ class Movies extends Component {
 
 
                         <div className="row mt-2 ml-3">
-                            <button type="button" className="btn btn-primary">Search</button>
+                            <button type="button" className="btn btn-dark btn-outline-dark">Search</button>
                         </div>
 
                     </div>

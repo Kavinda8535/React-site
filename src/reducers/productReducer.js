@@ -9,14 +9,17 @@
 //         },
 //     ]
 // }
+let defaultState = {
+    color: "red"
+}
 
-export default function PR(state={},action)
+export default function PR(state=defaultState,action)
 {
     switch(action.type)
     {
-        case "":
-        return { ...state
-        
+        case "CHANGE_COLOR":
+        return { ...state,
+            color: action.color     
         }
         break;
     }
