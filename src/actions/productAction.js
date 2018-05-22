@@ -1,6 +1,6 @@
 import Request from 'superagent';
 
-export const loadColor =()=>(dispatch)=>
+export function loadColor(dispatch)
 {
     var url =`http://www.colr.org/json/color/random`;
     Request.get(url).then((response)=> {

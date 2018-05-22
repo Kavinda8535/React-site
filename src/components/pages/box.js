@@ -5,9 +5,11 @@ import { bindActionCreators } from 'redux';
 class Box extends Component{
     render()
     {
+        console.log("color ", this.props)
         return(
-            <div> 
-                <button> Change Color </button>
+            
+            <div style={{backgroundColor:`${this.props.color}`, minBlockSize:10}}> 
+                <button onClick={()=> {this.props.handleClick()}}> Change Color </button>
             </div>
         )
     }
@@ -20,14 +22,14 @@ class Box extends Component{
 //      </div>
 // );
 
-function mapStateToProps(state)
-{
-    return {box: state.box}
-}
+// function mapStateToProps(state)
+// {
+//     return {color: state.color}
+// }
 
-function matchDispatchToProps(dispatch)
-{
-    return bindActionCreators()
-}
+// function matchDispatchToProps(dispatch)
+// {
+//     return bindActionCreators()
+// }
 
-export default connect(mapStateToProps)(Box);
+ export default Box;
