@@ -25,7 +25,7 @@ class BoxContainer extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        color: state.productsR.color
+        color: state.products.color
     }
 };
 export default connect(mapStateToProps, {loadColor})(BoxContainer);

@@ -14,6 +14,7 @@ let defaultState = {
     color: "red"
 }
 
+// reducers are listening that realavent action is dispatch. So they catch that action and execute relevent commands... 
 export default function PR(state=defaultState,action)
 {
     switch(action.type)
@@ -23,6 +24,9 @@ export default function PR(state=defaultState,action)
             color: action.color     
         }
         break;
+
+        default: return state;
+        
     }
     return state;
 }
