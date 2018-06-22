@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 class Box extends Component{
     render()
     {
-        console.log("color ", this.props)
+        console.log("color box ", this.props)
         return(
             
             <div style={{backgroundColor:`${this.props.color}`, minBlockSize:10}}> 

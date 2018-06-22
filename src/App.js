@@ -11,10 +11,10 @@ import Homepage from './components/pages/homePage';
 import Products from './components/pages/products';
 import Movies from './components/pages/movies';
 import Signup from './components/pages/signUpPage';
+import Contact from './components/pages/contact';
 
 // includes
 import './Assets/css/default.min.css';
-
 
 class App extends Component {
   render() {
@@ -26,7 +26,7 @@ class App extends Component {
           <Route exact path='/' component={Homepage} />
           <Route exact path='/Products' component={Products} />
           <Route exact path='/Movies' component={Movies} />
-
+          <Route exact path='/Contact' component={Contact} />
           <Route exact path='/Signup' component={Signup} />
           
           {/* <Homepage/>

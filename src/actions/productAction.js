@@ -12,25 +12,22 @@ import Request from 'axios';
 // }
 
 //loadColor action dispatcher
-export function loadColor(){
+export const loadColor = () => dispatch => {
     var url =`http://www.colr.org/json/color/random`;
-    return(dispatch) => {
-        return Request.get(url)
+    return Request.get(url)
         .then((response)=>{
             dispatch(changeColor("#" + response.data.new_color))
         })
         .catch((err) =>{
             console.error(err);
         });
-    }
 }
 
 //changeColor action dispatcher
 export function changeColor(color)
 {
-    return
-    {
+    return {
         type: "CHANGE_COLOR",
-        color //color: color (insted of this we can use just only color)
+        payload: color //color: color (insted of this we can use just only color)
     }
 }

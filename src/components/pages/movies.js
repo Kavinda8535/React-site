@@ -73,16 +73,25 @@ class Movies extends Component {
     }
 
     /// ****************************************
-    /// Called whenthe props and/or state change
+    /// Called when the props and/or state change
     componentWillUpdate(nextProps, nextState) {
 
     }
+
+    /// ****************************************
+    /// This is a Performance optimisation method.One of the Update method.
+    // shouldComponentUpdate(){
+    //     /// You can prevent wasted rendering component by  setting this life cycle methos return as flase. ( return false; )
+    //     /// Note that returning false does not prevent child components from re-rendering when their state changes.
+    // }
 
     /// *************************************
     /// Callled when the component is removed
     componentWillUnmount() {
 
     }
+
+    
 
     updateSearch = (e) => {
         // this.setState({ query: this.refs.query.value })

@@ -113,11 +113,10 @@ class SighupForm extends Component{
                 <div className="form-group">
                     <label className="controle-label">Email</label>
                     <input value={this.state.email} onChange={this.onChange} type="text" name="email" className="form-control" placeholder="Email Address"/>
-                    state
                 </div>
 
                 <div className="form-group">
-                    <label className="controle-label">Password</label>
+                    <label className="controle-label" placeholder="Enter password">Password</label>
                     <Password/>
 
                     {/* <div className="input-group">
@@ -152,7 +151,6 @@ class SighupForm extends Component{
                         <option value="" disabled>Choose your Timezone </option>
                         {options}
                     </select>
-                    pinterest.com
                 </div>
 
                 <div className="form-group">

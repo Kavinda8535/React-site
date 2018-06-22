@@ -5,9 +5,13 @@ import { bindActionCreators } from 'redux';
 import {loadColor} from '../../actions/productAction.js'; // Cannot understrand this...
 
 class BoxContainer extends Component{
+
+    
     render()
     {
-        console.log("color ", this.props.color)
+
+        // let {dispatch} = this.props
+        // console.log("color ", this.props,"---",dispatch)
         return(
             <div> 
                 <Box handleClick={this.props.loadColor} color={this.props.color}/>
