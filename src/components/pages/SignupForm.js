@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
+import {setUserName} from "../../actions/signUpAction"
 
 export class Password extends Component
 {
@@ -23,8 +24,14 @@ export class Password extends Component
         })
     }
 
-render
-(){
+    onChange=(e)=>
+    {
+        this.props.setUserName(e.target.value)
+    }
+
+    
+
+render(){
    return(
     <div className="input-group">
     {/* {console.log("retype", this.state.repwtype)} */}
@@ -33,7 +40,7 @@ render
             <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.repwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
         </span>
     </div>
-   )               
+   )
 
 }
 
@@ -87,7 +94,7 @@ class SighupForm extends Component{
 
     onChange(e)
     {
-        this.setState({[e.target.name]: e.target.value})
+        //this.setState({[e.target.name]: e.target.value})
     }
 
     onSubmit(e)
@@ -117,7 +124,7 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label" placeholder="Enter password">Password</label>
-                    <Password/>
+                    <Password setUserName={this.props.setUserName}/>
 
                     {/* <div className="input-group">
                         <input value={this.state.password} onChange={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
@@ -153,7 +160,7 @@ class SighupForm extends Component{
                     </select>
                 </div>
 
-                <div className="form-group">
+                <div className="form-setUserNamegroup">
                     <button className="btn btn-primary btn-lg">
                         Sign up
                     </button>
@@ -167,4 +174,4 @@ const mapStateToProps = (state) => ({
     
 })
 
-export default connect(mapStateToProps)(SighupForm);
+export default connect(mapStateToProps, {setUserName})(SighupForm);

@@ -21,7 +21,7 @@ export default function PR(state=defaultState,action)
     {
         case "CHANGE_COLOR":
         return { ...state,
-            color: action.payload     
+            color: action.payload    // action payload assiginig data to color ... 
         }
         break;
 
