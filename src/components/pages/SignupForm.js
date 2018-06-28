@@ -33,7 +33,7 @@ export class Password extends Component
     return(
         <div className="input-group">
         {/* {console.log("retype", this.state.repwtype)} */}
-            <input value={this.state.password} onChange={this.onChange} type={this.state.repwtype} name="password" className="form-control" placeholder="Enter password" />
+            <input value={this.state.password} onChange={this.onChange} type={this.state.pwtype} name="password" className="form-control" placeholder="Enter password" />
             <span className="input-group-btn">
                 <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.pwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
             </span>
@@ -55,11 +55,21 @@ export class ReEnterPassword extends Component
         this.showHide = this.showHide.bind(this);
     }
 
+    showHide(e)
+    {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+            //type: this.state.type === 'input' ? 'password' : 'input',
+            repwtype: this.state.repwtype === 'input' ? 'password' : 'input'
+        })
+    }
+
     render(){
         return(
             <div className="input-group">
             {/* {console.log("retype", this.state.repwtype)} */}
-                <input value={this.state.passwordConfirmation} onChange={this.onChange} type={this.state.repwtype} name="passwordConfirmation" className="form-control" placeholder="Enter password" />
+                <input value={this.state.passwordConfirmation} onChange={this.onChange} type={this.state.repwtype} name="passwordConfirmation" className="form-control" placeholder="Re-enter password" />
                 <span className="input-group-btn">
                     <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.repwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
                 </span>
@@ -163,7 +173,7 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label">Password Confirmation</label>
-                    <Password/>
+                    <ReEnterPassword/>
                     {/* <div className="input-group">
                     {console.log("retype", this.state.repwtype)}
                         <input value={this.state.passwordConfirmation} onChange={this.onChange} type="password" name="passwordConfirmation" className="form-control" placeholder="Re-enter password" />
