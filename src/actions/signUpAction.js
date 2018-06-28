@@ -16,6 +16,7 @@ import Request from 'axios';
 //     }
 // }
 
+// password action dispatcher...
 export function setUserNamePassword(psw)
 {
     return {
@@ -24,10 +25,27 @@ export function setUserNamePassword(psw)
     }
 }
 
+export function setFormData(name, value)
+{
+    return {
+        type : 'SET_FORM_DATA',
+        payload: { name, value }
+    }
+}
+
+// confirm password action dispatcher...
 export function setReEnterPassword(rePsw)
 {
     return {
         type : 'SET_REENTERED_PASSWORD',
         payload : rePsw
+    }
+}
+
+export function signUp_AD(formDetails)
+{
+    return {
+        type : 'FULL_FORM_DETAILS',
+        payload : formDetails
     }
 }

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
-import { setUserNamePassword, setReEnterPassword } from "../../actions/signUpAction"
+import { setUserNamePassword, setReEnterPassword, setFormData } from "../../actions/signUpAction"
 
 export class Password extends Component
 {
     constructor(props){
         super(props);
         this.state = {
-        pwtype: 'input'
+        pwtype: 'password'
         }
         this.showHide = this.showHide.bind(this);
     }
@@ -27,6 +27,7 @@ export class Password extends Component
     onChange=(e)=>
     {
         this.props.setUserNamePassword(e.target.value)
+        //this.props.setFormData('password', e.target.value)
     }
 
     render(){
@@ -50,7 +51,7 @@ export class ReEnterPassword extends Component
     constructor(props){
         super(props);
         this.state = {
-        repwtype: 'input'
+        repwtype: 'password'
         }
         this.showHide = this.showHide.bind(this);
     }
@@ -68,6 +69,7 @@ export class ReEnterPassword extends Component
     onChange=(e)=>
     {
         this.props.setReEnterPassword(e.target.value) // setting the re-entered password values to redux store.
+        //this.props.setFormData('confirmPassword', e.target.value);
     }
 
     render(){
@@ -97,7 +99,7 @@ class SighupForm extends Component{
             type: 'input',
             score: 'null'
         }
-        this.onChange = this.onChange.bind(this);
+        //this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
@@ -113,8 +115,8 @@ class SighupForm extends Component{
     //     })
     // }
 
-    // passwordStrength(e)
-    // {
+    // pemail
+    // {email
     //     if(e.target.value === '')
     //     {
     //         this.setState({
@@ -130,15 +132,20 @@ class SighupForm extends Component{
     //     }
     // }
 
-    onChange(e)
-    {
-        //this.setState({[e.target.name]: e.target.value})
-    }
+    // onChange(e)
+    // {
+    //     //this.setState({[e.target.name]: e.target.value})
+    //     //this.props.setFormData('email', e.target.value);
+    // }
 
     onSubmit(e)
     {
         e.preventDefault();
-        console.log("submit state:", this.state);
+        console.log("submit state:", this.props.signupState);
+    }
+
+    setDDData = (value) => {
+             this.setState({timeZone:value})
     }
 
     render(){
@@ -151,13 +158,17 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label">Username</label>
-                    <input value={this.state.username} onChange={this.onChange} type="text" name="username" className="form-control" placeholder="ABC123@gmail.com"/>
+                    <input onChange={(e) => {
+                        this.props.setFormData('username', e.target.value);
+                    }} type="text" name="username" className="form-control" placeholder="ABC123@gmail.com"/>
 
                 </div>
 
                 <div className="form-group">
                     <label className="controle-label">Email</label>
-                    <input value={this.state.email} onChange={this.onChange} type="text" name="email" className="form-control" placeholder="Email Address"/>
+                    <input onChange={(e) => {
+                        this.props.setFormData('email', e.target.value);
+                    }} type="text" name="email" className="form-control" placeholder="Email Address"/>
                 </div>
 
                 <div className="form-group">
@@ -191,7 +202,11 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label">Time Zone</label>
-                    <select value={this.state.timeZone} onChange={this.onChange} type="text" name="timeZone" className="form-control">
+
+                     <select value={this.state.timeZone} onChange={(e)=> {
+                    this.props.setFormData('timeZone', e.target.value);   
+                    this.setDDData(e.target.value);     
+                    }} type="text" name="timeZone" className="form-control">
 
                         <option value="" disabled>Choose your Timezone </option>
                         {options}
@@ -208,8 +223,9 @@ class SighupForm extends Component{
     }
 }
 
+
 const mapStateToProps = (state) => ({
-    
+     signupState : state.signup
 })
 
-export default connect(mapStateToProps, {setUserNamePassword, setReEnterPassword})(SighupForm);
+export default connect(mapStateToProps, {setUserNamePassword, setReEnterPassword, setFormData})(SighupForm);
