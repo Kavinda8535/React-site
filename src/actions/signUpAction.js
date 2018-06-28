@@ -16,10 +16,10 @@ import Request from 'axios';
 //     }
 // }
 
-export function setUserName(psw)
+export function setUserNamePassword(psw)
 {
     return {
-        type : 'SET_USER_NAME',
+        type : 'SET_USER_PASSWORD',
         payload: psw
     }
 }

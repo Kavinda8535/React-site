@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
-import {setUserName} from "../../actions/signUpAction"
+import { setUserNamePassword } from "../../actions/signUpAction"
 
 export class Password extends Component
 {
     constructor(props){
         super(props);
         this.state = {
-        repwtype: 'input'
+        pwtype: 'input'
         }
         this.showHide = this.showHide.bind(this);
     }
@@ -20,30 +20,53 @@ export class Password extends Component
         e.stopPropagation();
         this.setState({
             //type: this.state.type === 'input' ? 'password' : 'input',
-            repwtype: this.state.repwtype === 'input' ? 'password' : 'input'
+            pwtype: this.state.pwtype === 'input' ? 'password' : 'input'
         })
     }
 
     onChange=(e)=>
     {
-        this.props.setUserName(e.target.value)
+        this.props.setUserNamePassword(e.target.value)
     }
 
-    
+    render(){
+    return(
+        <div className="input-group">
+        {/* {console.log("retype", this.state.repwtype)} */}
+            <input value={this.state.password} onChange={this.onChange} type={this.state.repwtype} name="password" className="form-control" placeholder="Enter password" />
+            <span className="input-group-btn">
+                <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.pwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
+            </span>
+        </div>
+        )
 
-render(){
-   return(
-    <div className="input-group">
-    {/* {console.log("retype", this.state.repwtype)} */}
-        <input value={this.state.passwordConfirmation} onChange={this.onChange} type={this.state.repwtype} name="passwordConfirmation" className="form-control" placeholder="Re-enter password" />
-        <span className="input-group-btn">
-            <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.repwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
-        </span>
-    </div>
-   )
+    }
+
 
 }
 
+export class ReEnterPassword extends Component
+{
+    constructor(props){
+        super(props);
+        this.state = {
+        repwtype: 'input'
+        }
+        this.showHide = this.showHide.bind(this);
+    }
+
+    render(){
+        return(
+            <div className="input-group">
+            {/* {console.log("retype", this.state.repwtype)} */}
+                <input value={this.state.passwordConfirmation} onChange={this.onChange} type={this.state.repwtype} name="passwordConfirmation" className="form-control" placeholder="Enter password" />
+                <span className="input-group-btn">
+                    <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.repwtype === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
+                </span>
+            </div>
+            )
+    
+        }
 
 }
 
@@ -124,7 +147,7 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label" placeholder="Enter password">Password</label>
-                    <Password setUserName={this.props.setUserName}/>
+                    <Password setUserNamePassword={this.props.setUserNamePassword}/>
 
                     {/* <div className="input-group">
                         <input value={this.state.password} onChange={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
@@ -174,4 +197,4 @@ const mapStateToProps = (state) => ({
     
 })
 
-export default connect(mapStateToProps, {setUserName})(SighupForm);
+export default connect(mapStateToProps, {setUserNamePassword})(SighupForm);

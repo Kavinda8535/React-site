@@ -1,7 +1,7 @@
 
 
 const InitialState = {
-    username: "",
+    password: "",
     //name:""
 }
 
@@ -13,8 +13,8 @@ export default function signUp(state=InitialState, action)
         return { ...state, signUp : action.payload}
         break;
 
-        case "SET_USER_NAME":
-        return {...state, username : action.payload}
+        case "SET_USER_PASSWORD":
+        return {...state, password : action.payload}
         break;
 
 
