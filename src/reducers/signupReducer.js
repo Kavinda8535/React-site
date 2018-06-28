@@ -2,6 +2,7 @@
 
 const InitialState = {
     password: "",
+    confirmPassword : ""
     //name:""
 }
 
@@ -17,8 +18,9 @@ export default function signUp(state=InitialState, action)
         return {...state, password : action.payload}
         break;
 
-
-
+        case "SET_REENTERED_PASSWORD":
+        return {...state, confirmPassword : action.payload }
+        break;
 
         default: return state;
     }

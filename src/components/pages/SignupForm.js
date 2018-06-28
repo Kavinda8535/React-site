@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
-import { setUserNamePassword } from "../../actions/signUpAction"
+import { setUserNamePassword, setReEnterPassword } from "../../actions/signUpAction"
 
 export class Password extends Component
 {
@@ -65,6 +65,11 @@ export class ReEnterPassword extends Component
         })
     }
 
+    onChange=(e)=>
+    {
+        this.props.setReEnterPassword(e.target.value) // setting the re-entered password values to redux store.
+    }
+
     render(){
         return(
             <div className="input-group">
@@ -94,19 +99,19 @@ class SighupForm extends Component{
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.showHide = this.showHide.bind(this);
+        //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
     }
 
-    showHide(e)
-    {
-        e.preventDefault();
-        e.stopPropagation();
-        this.setState({
-            //type: this.state.type === 'input' ? 'password' : 'input',
-            repwtype: this.state.repwtype === 'input' ? 'password' : 'input'
-        })
-    }
+    // showHide(e)
+    // {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     this.setState({
+    //         //type: this.state.type === 'input' ? 'password' : 'input',
+    //         repwtype: this.state.repwtype === 'input' ? 'password' : 'input'
+    //     })
+    // }
 
     // passwordStrength(e)
     // {
@@ -173,7 +178,7 @@ class SighupForm extends Component{
 
                 <div className="form-group">
                     <label className="controle-label">Password Confirmation</label>
-                    <ReEnterPassword/>
+                    <ReEnterPassword setReEnterPassword={this.props.setReEnterPassword}/>
                     {/* <div className="input-group">
                     {console.log("retype", this.state.repwtype)}
                         <input value={this.state.passwordConfirmation} onChange={this.onChange} type="password" name="passwordConfirmation" className="form-control" placeholder="Re-enter password" />
@@ -207,4 +212,4 @@ const mapStateToProps = (state) => ({
     
 })
 
-export default connect(mapStateToProps, {setUserNamePassword})(SighupForm);
+export default connect(mapStateToProps, {setUserNamePassword, setReEnterPassword})(SighupForm);

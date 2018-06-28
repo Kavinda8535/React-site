@@ -23,3 +23,11 @@ export function setUserNamePassword(psw)
         payload: psw
     }
 }
+
+export function setReEnterPassword(rePsw)
+{
+    return {
+        type : 'SET_REENTERED_PASSWORD',
+        payload : rePsw
+    }
+}
