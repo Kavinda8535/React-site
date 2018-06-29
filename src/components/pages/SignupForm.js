@@ -97,10 +97,12 @@ class SighupForm extends Component{
             passwordConfirmation:'',
             timeZone: '',
             type: 'input',
-            score: 'null'
+            score: 'null',
+            signupId: '',
         }
         //this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        //this.onClick = this.onClick.bind(this);
         //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
     }
@@ -128,7 +130,7 @@ class SighupForm extends Component{
     //         var pw = zxcvbn(e.target.value);
     //         this.setState({
     //             score: pw.score
-    //         });
+    //         });signupId
     //     }
     // }
 
@@ -137,6 +139,11 @@ class SighupForm extends Component{
     //     //this.setState({[e.target.name]: e.target.value})
     //     //this.props.setFormData('email', e.target.value);
     // }
+
+    onClick(e)
+    {
+        console.log("onclick state:", this.props.signupState);
+    }
 
     onSubmit(e)
     {
@@ -176,9 +183,9 @@ class SighupForm extends Component{
                     <Password setUserNamePassword={this.props.setUserNamePassword}/>
 
                     {/* <div className="input-group">
-                        <input value={this.state.password} onChange={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
-                        </input>
-                     
+                        <input value={this.state.password} onChangsignupStatee={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
+                        </input>signupState
+                     signupState
                         <span className="input-group-btn">
                             <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.type === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
                         </span>
@@ -214,7 +221,9 @@ class SighupForm extends Component{
                 </div>
 
                 <div className="form-setUserNamegroup">
-                    <button className="btn btn-primary btn-lg">
+                    <button className="btn btn-primary btn-lg" onClick={(e)=>{
+                        this.props.setFormData('signupId', Date.now());
+                    }}>
                         Sign up
                     </button>
                 </div>
