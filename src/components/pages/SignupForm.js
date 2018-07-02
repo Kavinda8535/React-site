@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
-import { setUserNamePassword, setReEnterPassword, setFormData } from "../../actions/signUpAction"
+import { setUserNamePassword, setReEnterPassword, setFormData } from "../../actions/signUpAction";
+import { DB_CONFIG } from "../../config/firebase";
+import firebase from "firebase/app";
+import "firebase/database";
 
 export class Password extends Component
 {
@@ -99,12 +102,33 @@ class SighupForm extends Component{
             type: 'input',
             score: 'null',
             signupId: '',
+            members: []
         }
         //this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         //this.onClick = this.onClick.bind(this);
         //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
+
+        this.app = firebase.initializeApp(DB_CONFIG);
+        //console.log("app ",this.app);
+        this.database = this.app.database().ref().child('members');
+    }
+
+    componentWillMount(){
+        const previousMembers = this.props.members;
+
+        //DataSnapshot object
+        this.database.on('child_added', snap => {
+            previousMembers.push({
+                id: snap.key,
+                memberList: snap.val().memberList,
+            })
+
+            this.setState({
+                members: previousMembers
+            })
+        })
     }
 
     // showHide(e)
@@ -139,6 +163,11 @@ class SighupForm extends Component{
     //     //this.setState({[e.target.name]: e.target.value})
     //     //this.props.setFormData('email', e.target.value);
     // }
+
+    addMembers(m)
+    {
+        this.database.push().set({ memberList : m })
+    }
 
     onClick(e)
     {

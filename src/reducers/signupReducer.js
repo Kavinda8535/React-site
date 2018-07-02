@@ -6,7 +6,8 @@ const InitialState = {
     username : "", 
     email : "", 
     timeZone : "",
-    signupId: ""
+    signupId: "",
+    members: []
     // sigupFormDetails : {username : "", email : "", password : "", confirmPassword : "", timeZone : ""}
     //name:""
 }
