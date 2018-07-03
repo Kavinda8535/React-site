@@ -109,6 +109,7 @@ class SighupForm extends Component{
         //this.onClick = this.onClick.bind(this);
         //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
+        this.addMembers = this.addMembers.bind(this);
 
         this.app = firebase.initializeApp(DB_CONFIG);
         //console.log("app ",this.app);
@@ -119,16 +120,16 @@ class SighupForm extends Component{
         const previousMembers = this.props.members;
 
         //DataSnapshot object
-        this.database.on('child_added', snap => {
-            previousMembers.push({
-                id: snap.key,
-                memberList: snap.val().memberList,
-            })
+        // this.database.on('child_added', snap => {
+        //     previousMembers.push({
+        //         id: snap.key,
+        //         memberList: snap.val().memberList,
+        //     })
 
-            this.setState({
-                members: previousMembers
-            })
-        })
+        //     this.setState({
+        //         members: previousMembers
+        //     })
+        //})
     }
 
     // showHide(e)
@@ -166,7 +167,15 @@ class SighupForm extends Component{
 
     addMembers(m)
     {
-        this.database.push().set({ memberList : m })
+        this.database.push().set({ member : { 
+            password: m.password,
+            confirmPassword: m.confirmPassword,
+            username: m.username,
+            email: m.email,
+            timeZone: m.timeZone,
+            signupId: m.signupId,
+         } })
+         console.log("m ", m);
     }
 
     onClick(e)
@@ -178,6 +187,7 @@ class SighupForm extends Component{
     {
         e.preventDefault();
         console.log("submit state:", this.props.signupState);
+        this.addMembers(this.props.signupState);
     }
 
     setDDData = (value) => {
