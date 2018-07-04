@@ -6,6 +6,9 @@ import { setUserNamePassword, setReEnterPassword, setFormData } from "../../acti
 import { DB_CONFIG } from "../../config/firebase";
 import firebase from "firebase/app";
 import "firebase/database";
+//import * as firebase from "firebase";
+
+//export default !firebase.apps.length ? firebase.initializeApp(DB_CONFIG) : firebase.app();
 
 export class Password extends Component
 {
@@ -90,6 +93,15 @@ export class ReEnterPassword extends Component
 
 }
 
+export class Members extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            members: []
+        }
+    }
+}
+
 class SighupForm extends Component{
     constructor(props){
         super(props);
@@ -110,8 +122,18 @@ class SighupForm extends Component{
         //this.showHide = this.showHide.bind(this);
         //this.passwordStrength = this.passwordStrength.bind(this);
         this.addMembers = this.addMembers.bind(this);
+        this.removeMember = this.removeMember.bind(this);
 
-        this.app = firebase.initializeApp(DB_CONFIG);
+        // if(!firebase.apps.length){
+        //     console.log("initialize ")
+        //     this.app = firebase.initializeApp(DB_CONFIG);
+        // }
+        // else
+        // {
+        //     firebase.app();
+        // }
+        this.app = !firebase.apps.length ? firebase.initializeApp(DB_CONFIG) : firebase.app();
+
         //console.log("app ",this.app);
         this.database = this.app.database().ref().child('members');
     }
@@ -178,6 +200,18 @@ class SighupForm extends Component{
          console.log("m ", m);
     }
 
+    removeMember(mId)
+    {
+        this.database.child(mId).remove();
+    }
+
+    // we dont wnat to bind from above if we write the removeMember(mId) method like below
+    // removeMember = (mId) =>
+    // {
+    //     this.database.child(mId).remove();
+    // }
+
+
     onClick(e)
     {
         console.log("onclick state:", this.props.signupState);
@@ -200,10 +234,10 @@ class SighupForm extends Component{
         );
         return(
             <form className="ml-2" onSubmit={this.onSubmit}>
-                <h1>Welome to join community</h1>
+                <h2>Welome to join community</h2>
 
                 <div className="form-group">
-                    <label className="controle-label">Username</label>
+                    <label className="control-label">Username</label>
                     <input onChange={(e) => {
                         this.props.setFormData('username', e.target.value);
                     }} type="text" name="username" className="form-control" placeholder="ABC123@gmail.com"/>
@@ -211,20 +245,20 @@ class SighupForm extends Component{
                 </div>
 
                 <div className="form-group">
-                    <label className="controle-label">Email</label>
+                    <label className="control-label">Email</label>
                     <input onChange={(e) => {
                         this.props.setFormData('email', e.target.value);
                     }} type="text" name="email" className="form-control" placeholder="Email Address"/>
                 </div>
 
                 <div className="form-group">
-                    <label className="controle-label" placeholder="Enter password">Password</label>
+                    <label className="control-label" placeholder="Enter password">Password</label>
                     <Password setUserNamePassword={this.props.setUserNamePassword}/>
 
-                    {/* <div className="input-group">
-                        <input value={this.state.password} onChangsignupStatee={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
-                        </input>signupState
-                     signupState
+                    {/* <div className="inpusignupIdt-group">
+                        <input value={this.ssignupIdtate.password} onChangsignupStatee={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
+                        </input>signupStatesignupId
+                     signupStatesignupId
                         <span className="input-group-btn">
                             <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.type === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
                         </span>
@@ -234,7 +268,7 @@ class SighupForm extends Component{
                 </div>
 
                 <div className="form-group">
-                    <label className="controle-label">Password Confirmation</label>
+                    <label className="control-label">Password Confirmation</label>
                     <ReEnterPassword setReEnterPassword={this.props.setReEnterPassword}/>
                     {/* <div className="input-group">
                     {console.log("retype", this.state.repwtype)}
@@ -247,7 +281,7 @@ class SighupForm extends Component{
                 </div>
 
                 <div className="form-group">
-                    <label className="controle-label">Time Zone</label>
+                    <label className="control-label">Time Zone</label>
 
                      <select value={this.state.timeZone} onChange={(e)=> {
                     this.props.setFormData('timeZone', e.target.value);   
