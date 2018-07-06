@@ -20,6 +20,7 @@ class SignUpPage extends Component
 
                 <div className="col-md-6 col-md-offset-4">
                 <h3> Member List </h3>
+                    {/* <Members addMember = {this.addMember}/> */}
                     <Members/>
                 </div>
                 

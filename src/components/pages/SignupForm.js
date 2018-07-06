@@ -132,19 +132,33 @@ class SighupForm extends Component{
     }
 
     componentWillMount(){
-        const previousMembers = this.props.members;
+        //const previousMembers = [...this.props.members] !== null || undefined ? [...this.props.members] : '' ;
 
+        let existingMembers = firebase.database().ref("members/");
+        let exitingMemberList= [];
         //DataSnapshot object
-        // this.database.on('child_added', snap => {
-        //     previousMembers.push({
-        //         id: snap.key,
-        //         memberList: snap.val().memberList,
-        //     })
+        //let existingMembers = this.database.ref().child("members/");
+        existingMembers.on('child_added', function(data){
+            //console.log(data.val());
+            exitingMemberList.push(data.val());
+            
+        })
 
-        //     this.setState({
-        //         members: previousMembers
-        //     })
-        // })
+        this.loadexisitingMembers(exitingMemberList);
+
+        //previousMembers.push(existingMembers);
+    }
+
+    loadexisitingMembers(existingM)
+    {
+        const previousMembers = this.state.members;
+        previousMembers.push(existingM);
+        this.setState({
+            members : previousMembers
+        })
+
+        console.log("loding... M ", existingM);
+
     }
 
     // showHide(e)
@@ -184,6 +198,7 @@ class SighupForm extends Component{
     {
          const previousMembers = [...this.state.members];
 
+        // IF we set this member when the its push into the DB it will get as member variable as the KEY. Others are values.
         let member = { 
             password: m.password,
             confirmPassword: m.confirmPassword,
@@ -192,13 +207,46 @@ class SighupForm extends Component{
             timeZone: m.timeZone,
             signupId: m.signupId,
          }
+         
+         // In below after the state is set then oush inito the DB.This code can be write as below * mark commented place.
          previousMembers.push(member);
          this.setState({
              members : previousMembers
          },()=>{
             this.database.push().set({member})
-        })
-         //this.state.members = previousMembers;
+         }//,() => {
+        //     this.database.on('child_added', snap => {
+        //         previousMembers.push({
+        //             id: snap.key,
+        //             members: snap.val().members
+                    
+        //         })
+        //         console.log("DB_Data ", previousMembers)
+        //     })
+        // }, () => {
+        //     this.setState({
+        //         member : previousMembers
+        //     })
+        // }
+        )
+        
+        /*************************** */
+        /*
+            this.database.push().set( member : {
+                password: m.password,
+                confirmPassword: m.confirmPassword,
+                username: m.username,
+                email: m.email,
+                timeZone: m.timeZone,
+                signupId: m.signupId,
+            })
+
+            previousMembers.push(m);
+            this.setState({
+             members : previousMembers
+            }
+
+        */
 
          //this.state.members.push(m);
          console.log("addM_Membrs ", previousMembers);
@@ -234,7 +282,7 @@ class SighupForm extends Component{
     }
 
     render(){
-        console.log("mRenderInSide ", this.state.members);
+        //console.log("mRenderInSide ", this.state.members);
 
         const options = map(timezones, (val, key) => 
         <option key={val} value={val}> {key} </option>

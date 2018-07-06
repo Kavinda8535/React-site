@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SignupForm from './SignupForm';
+import { connect } from "react-redux";
 
 
 export class Member extends Component{
@@ -28,7 +29,7 @@ class Members extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            members: //[this.props.members]
+            members: //this.props.members
             [
                 {name: "namatha", email: "namatha@gmail.com", memberId: 1530598179511, key: 1530598179511},
                 {name: "samantha", email: "samantha@ymail.com", memberId: 1530598380759, key: 1530598380759},
@@ -59,5 +60,11 @@ class Members extends Component{
         )
     }
 }
+
+// const mapStateToProps = (state) => ({
+
+// })
+
+// export default connect(mapStateToProps)(Members);
 
 export default Members;
