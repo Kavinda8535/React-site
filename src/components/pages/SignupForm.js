@@ -135,30 +135,23 @@ class SighupForm extends Component{
         //const previousMembers = [...this.props.members] !== null || undefined ? [...this.props.members] : '' ;
 
         let existingMembers = firebase.database().ref("members/");
-        let exitingMemberList= [];
+        const previousMembers = this.state.members;
         //DataSnapshot object
         //let existingMembers = this.database.ref().child("members/");
         existingMembers.on('child_added', function(data){
-            //console.log(data.val());
-            exitingMemberList.push(data.val());
+           // console.log(data.val());
+            let arry = data.val()
+           // arry = arry.map((m)=>{return m.member})sdsdfsdfsf
+           console.log("data.val()",arry.member);
+           previousMembers.push(arry.member);
+            //this.loadexisitingMembers(data.val());
             
         })
-
-        this.loadexisitingMembers(exitingMemberList);
-
-        //previousMembers.push(existingMembers);
-    }
-
-    loadexisitingMembers(existingM)
-    {
-        const previousMembers = this.state.members;
-        previousMembers.push(existingM);
         this.setState({
             members : previousMembers
-        })
-
-        console.log("loding... M ", existingM);
-
+            } //,()=>{ console.log("after==== ", this.state.members);} <=== This is callback. You can see what set to the state by doing this.
+    
+        )
     }
 
     // showHide(e)
@@ -314,7 +307,8 @@ class SighupForm extends Component{
                         <input value={this.ssignupIdtate.password} onChangsignupStatee={this.onChange} type={this.state.type} name="password" className="form-control" placeholder="Enter password">
                         </input>signupStatesignupId
                      signupStatesignupId
-                        <span className="input-group-btn">
+                        <span className="input-                        this.props.setMembersDataToList(this.state.members);
+group-btn">
                             <button className="btn btn-default reveal" type="button" onClick={this.showHide}>{this.state.type === 'input' ? 'Hide' : 'Show'}<i className="glyphicon glyphicon-eye-open"></i></button>
                         </span>
                     </div> */}
