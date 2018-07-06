@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import timezones from '../data/timezones';
 import map from 'lodash/map';
 import { connect } from "react-redux";
-import { setUserNamePassword, setReEnterPassword, setFormData } from "../../actions/signUpAction";
+import { setUserNamePassword, setReEnterPassword, setFormData, setMembersDataToList } from "../../actions/signUpAction";
 import { DB_CONFIG } from "../../config/firebase";
 import firebase from "firebase/app";
 import "firebase/database";
@@ -93,14 +93,6 @@ export class ReEnterPassword extends Component
 
 }
 
-export class Members extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            members: []
-        }
-    }
-}
 
 class SighupForm extends Component{
     constructor(props){
@@ -136,6 +128,7 @@ class SighupForm extends Component{
 
         //console.log("app ",this.app);
         this.database = this.app.database().ref().child('members');
+        
     }
 
     componentWillMount(){
@@ -151,7 +144,7 @@ class SighupForm extends Component{
         //     this.setState({
         //         members: previousMembers
         //     })
-        //})
+        // })
     }
 
     // showHide(e)
@@ -164,15 +157,15 @@ class SighupForm extends Component{
     //     })
     // }
 
-    // pemail
-    // {email
-    //     if(e.target.value === '')
+    // pemailmembers
+    // {emailmembers
+    //     ifmembers
     //     {
-    //         this.setState({
-    //             score: 'null'
-    //         })
+    //       members
+    //       members
+    //       members
     //     }
-    //     else
+    //     elmembers
     //     {
     //         var pw = zxcvbn(e.target.value);
     //         this.setState({
@@ -181,23 +174,35 @@ class SighupForm extends Component{
     //     }
     // }
 
-    // onChange(e)
-    // {
-    //     //this.setState({[e.target.name]: e.target.value})
-    //     //this.props.setFormData('email', e.target.value);
-    // }
+    // onChange(e)addMembersstate
+    // {members
+    //  members]: addMembersstate
+    //  members', addMembers
+    // }members
 
     addMembers(m)
     {
-        this.database.push().set({ member : { 
+         const previousMembers = [...this.state.members];
+
+        let member = { 
             password: m.password,
             confirmPassword: m.confirmPassword,
             username: m.username,
             email: m.email,
             timeZone: m.timeZone,
             signupId: m.signupId,
-         } })
-         console.log("m ", m);
+         }
+         previousMembers.push(member);
+         this.setState({
+             members : previousMembers
+         },()=>{
+            this.database.push().set({member})
+        })
+         //this.state.members = previousMembers;
+
+         //this.state.members.push(m);
+         console.log("addM_Membrs ", previousMembers);
+         
     }
 
     removeMember(mId)
@@ -220,7 +225,7 @@ class SighupForm extends Component{
     onSubmit(e)
     {
         e.preventDefault();
-        console.log("submit state:", this.props.signupState);
+        console.log("submit state:", this.props.membersState);
         this.addMembers(this.props.signupState);
     }
 
@@ -229,6 +234,8 @@ class SighupForm extends Component{
     }
 
     render(){
+        console.log("mRenderInSide ", this.state.members);
+
         const options = map(timezones, (val, key) => 
         <option key={val} value={val}> {key} </option>
         );
@@ -289,13 +296,14 @@ class SighupForm extends Component{
                     }} type="text" name="timeZone" className="form-control">
 
                         <option value="" disabled>Choose your Timezone </option>
-                        {options}
+                        {options}state
                     </select>
                 </div>
 
                 <div className="form-setUserNamegroup">
                     <button className="btn btn-primary btn-lg" onClick={(e)=>{
                         this.props.setFormData('signupId', Date.now());
+                        this.props.setMembersDataToList(this.state.members);
                     }}>
                         Sign up
                     </button>
@@ -307,7 +315,8 @@ class SighupForm extends Component{
 
 
 const mapStateToProps = (state) => ({
-     signupState : state.signup
+     signupState : state.signup,
+     membersState : state.signup.members
 })
 
-export default connect(mapStateToProps, {setUserNamePassword, setReEnterPassword, setFormData})(SighupForm);
+export default connect(mapStateToProps, {setUserNamePassword, setReEnterPassword, setFormData, setMembersDataToList})(SighupForm);

@@ -1,3 +1,4 @@
+import { stat } from "fs";
 
 
 const InitialState = {
@@ -32,6 +33,11 @@ export default function signUp(state=InitialState, action)
 
         case "SET_REENTERED_PASSWORD":
         return {...state, confirmPassword : action.payload }
+        break;
+
+        case "SET_ALL_MEMBERS":
+        console.log("reducer members", action.payload)
+        return {...state, members : action.payload}
         break;
 
         default: return state;

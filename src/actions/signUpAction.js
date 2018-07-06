@@ -49,3 +49,12 @@ export function signUp_AD(formDetails)
         payload : formDetails
     }
 }
+
+export function setMembersDataToList(mDataList)
+{
+    console.log("memberDataList ", mDataList)
+    return {
+        type : 'SET_ALL_MEMBERS',
+        payload : mDataList
+    }
+}

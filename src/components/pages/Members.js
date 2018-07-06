@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SignupForm from './SignupForm';
 
 
 export class Member extends Component{
@@ -27,9 +28,12 @@ class Members extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            members: [
+            members: //[this.props.members]
+            [
                 {name: "namatha", email: "namatha@gmail.com", memberId: 1530598179511, key: 1530598179511},
-                {name: "samantha", email: "samantha@ymail.com", memberId: 1530598380759, key: 1530598380759}
+                {name: "samantha", email: "samantha@ymail.com", memberId: 1530598380759, key: 1530598380759},
+                {name: "priyantha", email: "priyantha@ymail.com", memberId: 1530598380789, key: 1530598380789},
+                {name: "udantha", email: "udantha@ymail.com", memberId: 1530598380779, key: 1530598380779}
             ]
         };
     }
@@ -37,7 +41,7 @@ class Members extends Component{
     render(){
         return(
             <div>
-                This is where your MEMBERS list
+                
 
                 {
                     this.state.members.map((membr) => {
