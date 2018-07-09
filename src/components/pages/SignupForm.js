@@ -131,27 +131,67 @@ class SighupForm extends Component{
         
     }
 
-    componentWillMount(){
+    componentWillMount(){      
         //const previousMembers = [...this.props.members] !== null || undefined ? [...this.props.members] : '' ;
 
         let existingMembers = firebase.database().ref("members/");
         const previousMembers = this.state.members;
+
         //DataSnapshot object
         //let existingMembers = this.database.ref().child("members/");
         existingMembers.on('child_added', function(data){
            // console.log(data.val());
             let arry = data.val()
            // arry = arry.map((m)=>{return m.member})sdsdfsdfsf
-           console.log("data.val()",arry.member);
+           //console.log("data.val()",arry.member);
            previousMembers.push(arry.member);
             //this.loadexisitingMembers(data.val());
             
         })
         this.setState({
             members : previousMembers
-            } //,()=>{ console.log("after==== ", this.state.members);} <=== This is callback. You can see what set to the state by doing this.
+            }//,()=>{ console.log("after==== ", this.state.members);} //<=== This is callback. You can see what set to the state by doing this.
+        )
+
+        //this.props.setMembersDataToList(this.state.members);
+        
+    }
+
+    componentDidMount() {
+        let existingMembers = firebase.database().ref("members/");
+        const previousMembers = this.state.members;
+
+        existingMembers.once('value').then(function(snapshot){
+            let allMemberData = (snapshot.val() || 'Anonymous');
+            let keys = Object.keys(allMemberData);
+            console.log("keys", keys);
+            for(let i = 0; i < keys.length; i++)
+            {
+                let k = keys[i];
+                //console.log("k ",k);
+                let username = allMemberData[k].member.username;
+                let mail = allMemberData[k].member.email;
+                //console.log("member data ", username, " - ", mail)
+                 console.log("member data ", allMemberData[k].member);
+                //previousMembers = allMemberData[k].member;
+                previousMembers.push(allMemberData[k].member);
+            }
+            console.log("Total member count :" , keys.length);
+
+            
+            //console.log('keys from CDM ', keys);
+                     
+            //console.log('username from CDM ');
+        })
+
+        this.setState({
+            members : previousMembers
+            },()=>{ console.log("componentDidMount ===> ", this.state.members);} //<=== This is callback. You can see what set to the state by doing this.
     
         )
+        
+        this.props.setMembersDataToList(this.state.members);
+
     }
 
     // showHide(e)
